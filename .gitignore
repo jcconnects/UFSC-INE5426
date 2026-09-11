@@ -1,0 +1,9 @@
+# Compiled binaries
+lexico
+
+# Object files
+*.o
+*.obj
+
+# macOS
+.DS_Store
