@@ -1,0 +1,47 @@
+@startuml diagrama_dispatcher
+title Fluxo do proximo_token() — despacho para os diagramas
+' Implementado em proximo_token(). Le 1 char e escolhe qual scanner rodar.
+' Cada estado "get*" corresponde a um diagrama proprio (arquivos 1-4).
+
+skinparam state {
+  BackgroundColor #FDFDFD
+  BorderColor #333333
+  ArrowColor #333333
+  FontName "Helvetica"
+}
+
+[*] --> ler : proximo_token()
+state "ler nextChar()" as ler
+
+state "getIdent()"  as ident  : diagrama 1 (IDENT / reservada)
+state "getNumber()" as number : diagrama 2 (INT / FLOAT)
+state "getRelop()"  as relop  : diagrama 3 (RELOP / AT)
+state "getString()" as string : diagrama 4 (STRING_CONSTANT)
+state "simbolo_para_token()" as simbolo : + - * / ( ) { } [ ] ; ,
+state "BRANCO (ignora)" as branco
+state "EOF" as eof <<accepting>>
+state "ERRO" as erro <<accepting>>
+
+ler --> eof     : EOF
+ler --> branco  : espaco | tab | \\n | \\r
+ler --> ident   : letra | _
+ler --> number  : digito
+ler --> relop   : < | = | > | !
+ler --> string  : \"
+ler --> simbolo : outro simbolo mapeado
+ler --> erro    : simbolo nao mapeado
+
+branco --> ler  : descarta, le proximo
+
+ident  --> [*] : TOKEN
+number --> [*] : TOKEN
+relop  --> [*] : TOKEN
+string --> [*] : TOKEN
+simbolo --> [*] : TOKEN
+
+note bottom of ler
+  1 arquivo .puml por funcao:
+  facilita edicao/paralelizacao
+  futura de cada diagrama.
+end note
+@enduml

@@ -1,0 +1,55 @@
+@startuml diagrama_number
+title Diagrama de Transicao — NUMERO (int / float / cientifico)
+' Slide 18 (estados 17..26*). Implementado em getNumber().
+' 24*,25*,26* = estados finais com lookahead (retract de 1 char).
+
+skinparam state {
+  BackgroundColor #FDFDFD
+  BorderColor #333333
+  ArrowColor #333333
+  FontName "Helvetica"
+}
+
+[*] --> s17 : inicio
+state "17" as s17
+state "18" as s18
+state "19" as s19
+state "20" as s20
+state "21" as s21
+state "22" as s22
+state "23" as s23
+state "24 *  FLOAT" as s24 <<accepting>>
+state "25 *  INT"   as s25 <<accepting>>
+state "26 *  FLOAT" as s26 <<accepting>>
+
+s17 --> s18 : digito
+
+' --- parte inteira ---
+s18 --> s18 : digito
+s18 --> s19 : .
+s18 --> s21 : E | e
+s18 --> s25 : outro
+
+' --- parte fracionaria ---
+s19 --> s20 : digito
+s20 --> s20 : digito
+s20 --> s21 : E | e
+s20 --> s26 : outro
+
+' --- expoente ---
+s21 --> s22 : + | -
+s21 --> s23 : digito
+s22 --> s23 : digito
+s23 --> s23 : digito
+s23 --> s24 : outro
+
+s24 --> [*] : FLOAT_CONSTANT (retract)
+s25 --> [*] : INT_CONSTANT (retract)
+s26 --> [*] : FLOAT_CONSTANT (retract)
+
+note bottom of s19
+  '.' sem digito seguinte,
+  ou 'E' sem digito,
+  => TK_ERRO (nao mostrado).
+end note
+@enduml

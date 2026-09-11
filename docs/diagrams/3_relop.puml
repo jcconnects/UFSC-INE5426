@@ -1,0 +1,53 @@
+@startuml diagrama_relop
+title Diagrama de Transicao — RELOP + AT (relacionais e atribuicao)
+' Slide 14 (estados 0..10). Implementado em getRelop().
+' Estados finais com '*' fazem lookahead (retract). '=' isolado => AT.
+
+skinparam state {
+  BackgroundColor #FDFDFD
+  BorderColor #333333
+  ArrowColor #333333
+  FontName "Helvetica"
+}
+
+[*] --> s0 : inicio
+state "0" as s0
+state "1" as s1
+state "2  RELOP <=" as s2 <<accepting>>
+state "3 *  RELOP <" as s3 <<accepting>>
+state "4" as s4
+state "5  RELOP ==" as s5 <<accepting>>
+state "6 *  AT =" as s6 <<accepting>>
+state "7" as s7
+state "8  RELOP >=" as s8 <<accepting>>
+state "9 *  RELOP >" as s9b <<accepting>>
+state "10" as s10
+state "11  RELOP !=" as s11 <<accepting>>
+
+' --- ramo '<' ---
+s0 --> s1 : <
+s1 --> s2  : =
+s1 --> s3  : outro
+
+' --- ramo '=' ---
+s0 --> s4 : =
+s4 --> s5 : =
+s4 --> s6 : outro
+
+' --- ramo '>' ---
+s0 --> s7 : >
+s7 --> s8  : =
+s7 --> s9b : outro
+
+' --- ramo '!' ---
+s0 --> s10 : !
+s10 --> s11 : =
+
+note right of s6
+  Diferenca-chave:
+  '=' seguido de outro
+  nao-'=' => TK_AT
+  (atribuicao), nao RELOP.
+  '!' isolado => TK_ERRO.
+end note
+@enduml

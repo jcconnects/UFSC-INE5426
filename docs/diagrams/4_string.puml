@@ -1,0 +1,32 @@
+@startuml diagrama_string
+title Diagrama de Transicao — STRING_CONSTANT
+' Implementado em getString(). Delimitada por aspas duplas.
+' Sem lookahead: a aspa de fechamento e consumida.
+
+skinparam state {
+  BackgroundColor #FDFDFD
+  BorderColor #333333
+  ArrowColor #333333
+  FontName "Helvetica"
+}
+
+[*] --> s0 : inicio
+state "0" as s0
+state "1" as s1
+state "2  STRING_CONSTANT" as s2 <<accepting>>
+state "3  ERRO" as s3 <<accepting>>
+
+s0 --> s1 : \"  (abre)
+s1 --> s1 : char != \" , \\n , EOF
+s1 --> s2 : \"  (fecha)
+s1 --> s3 : \\n | EOF
+
+s2 --> [*] : aceita
+s3 --> [*] : string nao fechada
+
+note right of s3
+  \\n ou EOF antes da
+  aspa de fechamento
+  => TK_ERRO (retract).
+end note
+@enduml

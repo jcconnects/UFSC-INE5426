@@ -1,0 +1,31 @@
+@startuml diagrama_ident
+title Diagrama de Transicao — IDENT (identificador / palavra reservada)
+' Slide 17 (estados 11-12-13*). Implementado em getIdent().
+' 13* = estado final com lookahead (retract de 1 char).
+
+skinparam state {
+  BackgroundColor #FDFDFD
+  BorderColor #333333
+  ArrowColor #333333
+  FontName "Helvetica"
+}
+
+[*] --> s11 : inicio
+state "11" as s11
+state "12" as s12
+state "13 *" as s13 <<accepting>>
+
+s11 --> s12 : letra
+s12 --> s12 : letra | digito
+s12 --> s13 : outro
+s13 --> [*] : aceita IDENT\n(retract; confere reservada)
+
+note right of s13
+  '*' = lookahead:
+  leu 1 char a mais,
+  devolvido via retract().
+  Lexema conferido na tabela
+  de reservadas -> DEF/INT/...
+  ou IDENT.
+end note
+@enduml
