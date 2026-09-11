@@ -1,4 +1,4 @@
 def f (int a) {
-x = x + a;
+x = 999 + "venceremos";
 return;
 }
