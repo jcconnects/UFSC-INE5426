@@ -204,12 +204,9 @@ Logo:
 \[
 FIRST(TYPE\ ident\ PARAMLIST_TAIL)
 \cap FOLLOW(PARAMLIST)
-\]
-
-# \[
-
-# T\cap\{\texttt{)}\}
-
+=
+T\cap\{\texttt{)}\}
+=
 \varnothing
 \]
 
@@ -250,12 +247,9 @@ A interseção é:
 \[
 FIRST(\texttt{,}\ PARAMLIST)
 \cap FOLLOW(PARAMLIST_TAIL)
-\]
-
-# \[
-
-# \{\texttt{,}\}\cap\{\texttt{)}\}
-
+=
+\{\texttt{,}\}\cap\{\texttt{)}\}
+=
 \varnothing
 \]
 
@@ -425,12 +419,9 @@ Logo:
 \[
 FIRST(\texttt{else}\ STATEMENT)
 \cap FOLLOW(ELSE_OPT)
-\]
-
-# \[
-
-# \{\texttt{else}\}\cap\{\texttt{endif}\}
-
+=
+\{\texttt{else}\}\cap\{\texttt{endif}\}
+=
 \varnothing
 \]
 
@@ -475,12 +466,9 @@ A interseção é:
 
 \[
 FIRST(STATELIST)\cap FOLLOW(STATELIST_TAIL)
-\]
-
-# \[
-
-# S\cap\{\texttt{\}}\}
-
+=
+S\cap\{\texttt{\}}\}
+=
 \varnothing
 \]
 
