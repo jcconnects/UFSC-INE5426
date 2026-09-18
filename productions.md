@@ -3,21 +3,21 @@
 Para uma produção da forma:
 
 $$
-A \rightarrow \alpha\_1 \mid \alpha\_2 \mid \lambda
+A \rightarrow \alpha_1 \mid \alpha_2 \mid \lambda
 $$
 
 devem ser verificadas as seguintes condições:
 
 $$
-FIRST(\alpha\_1)\cap FIRST(\alpha\_2)=\varnothing
+FIRST(\alpha_1)\cap FIRST(\alpha_2)=\varnothing
 $$
 
 $$
-FIRST(\alpha\_1)\cap FOLLOW(A)=\varnothing
+FIRST(\alpha_1)\cap FOLLOW(A)=\varnothing
 $$
 
 $$
-FIRST(\alpha\_2)\cap FOLLOW(A)=\varnothing
+FIRST(\alpha_2)\cap FOLLOW(A)=\varnothing
 $$
 
 Quando existe somente uma alternativa não vazia:
@@ -668,7 +668,7 @@ A produção é:
 
 $$
 TERM\_TAIL\rightarrow
-\texttt{\*}\ UNARYEXPR\ TERM\_TAIL
+\texttt{*}\ UNARYEXPR\ TERM\_TAIL
 \mid
 \texttt{/}\ UNARYEXPR\ TERM\_TAIL
 \mid
@@ -679,7 +679,7 @@ $$
 Os conjuntos `FIRST` das alternativas não vazias são:
 
 $$
-\{\texttt{\*}\},
+\{\texttt{*}\},
 \qquad
 \{\texttt{/}\},
 \qquad
@@ -689,13 +689,13 @@ $$
 As interseções entre essas alternativas são:
 
 $$
-\{\texttt{\*}\}\cap\{\texttt{/}\}
+\{\texttt{*}\}\cap\{\texttt{/}\}
 =
 \varnothing
 $$
 
 $$
-\{\texttt{\*}\}\cap\{\texttt{\%}\}
+\{\texttt{*}\}\cap\{\texttt{\%}\}
 =
 \varnothing
 $$
@@ -726,7 +726,7 @@ $$
 Logo:
 
 $$
-\{\texttt{\*},\texttt{/},\texttt{\%}\}
+\{\texttt{*},\texttt{/},\texttt{\%}\}
 \cap FOLLOW(TERM\_TAIL)
 =
 \varnothing
@@ -763,7 +763,7 @@ $$
 FOLLOW(LVALUE\_TAIL)=\{&
 \texttt{=},
 \texttt{+},\texttt{-},
-\texttt{\*},\texttt{/},\texttt{\%},\\
+\texttt{*},\texttt{/},\texttt{\%},\\
 &\texttt{<},\texttt{>},\texttt{<=},
 \texttt{>=},\texttt{==},\texttt{!=},\\
 &\texttt{;},\texttt{)},\texttt{]}
